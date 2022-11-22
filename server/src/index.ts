@@ -3,6 +3,7 @@ import { AppDataSource } from "./data-source";
 import { config } from "dotenv";
 import * as cors from "cors";
 import { userRoutes } from "./users/controllers/user.controller";
+import { shiftRouter } from "./shifts/shift.controller";
 
 config();
 const productionOrigins = ["https://localhost:3000"];
@@ -22,6 +23,7 @@ AppDataSource.initialize()
 
     // setup express routes
     app.use("/users", userRoutes);
+    app.use("/shifts", shiftRouter);
 
     // start express server
     app.listen(PORT, () => {
