@@ -14,6 +14,7 @@ GROUP BY facility_id, t1.job_id
 ORDER BY t1.facility_id ASC, t1.nurse_type_needed DESC;
 
 `);
+    console.table(jobs);
     res.send(jobs);
   } catch (error) {
     res.status(500).send(error);

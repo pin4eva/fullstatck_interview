@@ -11,7 +11,7 @@ export const AppDataSource = new DataSource({
   password: process.env.DATABASE_PASSWORD || "test",
   database: process.env.DATABASE_NAME || "test",
   synchronize: process.env.NODE_ENV === "development",
-  logging: process.env.NODE_ENV === "development",
+  // logging: process.env.NODE_ENV === "development",
   entities: ["src/**/*.entity{.ts,.js}"],
   migrations: ["src/migrations/**/*{.ts,.js}"],
   subscribers: [],
