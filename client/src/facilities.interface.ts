@@ -14,3 +14,18 @@ export interface ShiftOverlapResult {
   overlapMinutes: number;
   exceedsOverlapThreshold: string;
 }
+
+export interface Q4Response {
+  job_id: number;
+  facility_id: number;
+  total_number_nurses_needed: number;
+  nurses_hired: number;
+  nurses_left: number;
+}
+
+export interface Q5Response {
+  nurse_id: number;
+  nurse_name: string;
+  nurse_type: string;
+  can_apply_for: string;
+}

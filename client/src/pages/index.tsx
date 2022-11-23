@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import FacilityCard from "../components/FacilityCard";
+import Q4Table from "../components/Q4Table";
+import Q5Table from "../components/Q5Table";
 import { useFacilityContext } from "../facilities.context";
+import { useJobContext } from "../jobs.context";
 
 const HomePage = () => {
   const {
@@ -12,6 +15,8 @@ const HomePage = () => {
     overlapResult,
     clearSelection,
   } = useFacilityContext();
+
+  const { Q4Queries, Q5Queries, getQ4Queries, getQ5Queries } = useJobContext();
 
   useEffect(() => {
     getFacilities();
@@ -68,6 +73,15 @@ const HomePage = () => {
           <FacilityCard facility={facility} key={facility.shift_id} />
         ))}
       </div>
+
+      <div className="query bottom my-4">
+        <button onClick={getQ4Queries}>Execute Q4 Query</button>
+        <button onClick={getQ5Queries}>Execute Q5 Query</button>
+        <button>Execute Q6 Query</button>
+      </div>
+
+      {Q4Queries && <Q4Table data={Q4Queries} />}
+      {Q5Queries && <Q5Table data={Q5Queries} />}
     </Wrapper>
   );
 };
@@ -82,11 +96,12 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 80%;
   margin: auto;
-  background-color: #f2ecec;
+
   padding: 1rem;
   margin-top: 2rem;
 
   .top {
+    background-color: #f2ecec;
     display: flex;
     align-items: center;
     border: 3px solid gray;
@@ -98,6 +113,12 @@ const Wrapper = styled.div`
 
   .facility-list {
     margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .query {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
