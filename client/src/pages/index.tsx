@@ -4,7 +4,14 @@ import FacilityCard from "../components/FacilityCard";
 import { useFacilityContext } from "../facilities.context";
 
 const HomePage = () => {
-  const { facilities, getFacilities } = useFacilityContext();
+  const {
+    facilities,
+    getFacilities,
+    selectedShifts,
+    compareShifts,
+    overlapResult,
+    clearSelection,
+  } = useFacilityContext();
 
   useEffect(() => {
     getFacilities();
@@ -14,13 +21,45 @@ const HomePage = () => {
       <div className="top">
         <div className="left">
           <ul>
-            <li>Overlap Minutes: 30</li>
-            <li>Max Overlap Threshold: 0</li>
-            <li>Exceeds Overlap threshold: True</li>
+            <li>
+              Overlap Minutes:{" "}
+              <span className="fw-bold ms-2">
+                {overlapResult?.overlapMinutes}
+              </span>{" "}
+            </li>
+            <li>
+              Max Overlap Threshold:
+              <span className="fw-bold ms-2">
+                {overlapResult?.maximumOverlapThreshold}
+              </span>
+            </li>
+            <li>
+              Exceeds Overlap threshold:
+              <span className="fw-bold ms-2">
+                {overlapResult?.exceedsOverlapThreshold}
+              </span>
+            </li>
           </ul>
         </div>
         <div className="right">
-          <button className="btn rounded-0 btn-secondary">Submit</button>
+          <button
+            className="btn rounded-0 btn-secondary"
+            disabled={selectedShifts.length < 2}
+            onClick={() => {
+              if (selectedShifts.length > 1) {
+                compareShifts();
+              }
+            }}
+          >
+            Compare Shifts
+          </button>
+          <button
+            className="btn rounded-0 btn-danger ms-3"
+            disabled={selectedShifts.length === 0}
+            onClick={clearSelection}
+          >
+            Clear Shifts
+          </button>
         </div>
       </div>
 

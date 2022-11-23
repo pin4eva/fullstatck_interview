@@ -8,3 +8,9 @@ export interface IFacility {
   start_date_time: Date;
   end_date_time: Date;
 }
+
+export interface ShiftOverlapResult {
+  maximumOverlapThreshold: number;
+  overlapMinutes: number;
+  exceedsOverlapThreshold: string;
+}

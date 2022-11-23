@@ -3,13 +3,23 @@ import styled from "styled-components";
 import { IFacility } from "../facilities.interface";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
+import { useFacilityContext } from "../facilities.context";
 
 dayjs.extend(localizedFormat);
 
-const FacilityCard: React.FC<{ facility: IFacility }> = ({ facility }) => {
-  console.log(facility.start_time);
+interface IProp {
+  facility: IFacility;
+}
+
+const FacilityCard: React.FC<IProp> = ({ facility }) => {
+  const { selectedShifts, setSelectedShifts } = useFacilityContext();
+
   return (
-    <Wrapper className="facility-card">
+    <Wrapper
+      className="facility-card"
+      disabled={selectedShifts.some((v) => v === facility.shift_id)}
+      onClick={() => setSelectedShifts(facility.shift_id)}
+    >
       <p>{facility?.facility_name}</p>
       <p>{dayjs(facility?.shift_date).format("YYYY-MM-DD")}</p>
       <p>
