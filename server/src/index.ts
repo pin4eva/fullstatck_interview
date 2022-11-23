@@ -24,7 +24,7 @@ AppDataSource.initialize()
 
     // setup express routes
     app.use("/users", userRoutes);
-    app.use("/shifts", shiftRouter);
+    app.use("/facilities", shiftRouter);
     app.use("/jobs", jobRouter);
 
     // start express server
