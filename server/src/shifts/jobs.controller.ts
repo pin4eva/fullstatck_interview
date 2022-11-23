@@ -11,7 +11,7 @@ JOIN nurses ON nurses.nurse_id = nurse_hired_jobs.nurse_id
 WHERE nurse_hired_jobs.job_id = t1.job_id AND
 nurses.nurse_type = t1.nurse_type_needed
 GROUP BY facility_id, t1.job_id
-ORDER BY t1.facility_id ASC, t1.nurse_type_needed DESC;
+ORDER BY t1.facility_id ASC, t1.nurse_type_needed ASC;
 
 `);
 

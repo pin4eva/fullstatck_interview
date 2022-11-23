@@ -36,7 +36,6 @@ export const FacilityContextProvider: React.FC<{
 
   const compareShifts = async () => {
     try {
-      console.log(selectedShifts);
       const { data } = await axios.get(
         `http://localhost:8000/facilities/overlap?shift1=${selectedShifts[0]}&shift2=${selectedShifts[1]}`
       );
