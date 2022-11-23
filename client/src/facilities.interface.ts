@@ -29,3 +29,7 @@ export interface Q5Response {
   nurse_type: string;
   can_apply_for: string;
 }
+
+export interface Q6Response {
+  nurse_name: string;
+}

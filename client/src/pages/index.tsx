@@ -3,6 +3,7 @@ import styled from "styled-components";
 import FacilityCard from "../components/FacilityCard";
 import Q4Table from "../components/Q4Table";
 import Q5Table from "../components/Q5Table";
+import Q6Table from "../components/Q6Table";
 import { useFacilityContext } from "../facilities.context";
 import { useJobContext } from "../jobs.context";
 
@@ -16,7 +17,14 @@ const HomePage = () => {
     clearSelection,
   } = useFacilityContext();
 
-  const { Q4Queries, Q5Queries, getQ4Queries, getQ5Queries } = useJobContext();
+  const {
+    Q4Queries,
+    Q5Queries,
+    Q6Queries,
+    getQ4Queries,
+    getQ5Queries,
+    getQ6Queries,
+  } = useJobContext();
 
   useEffect(() => {
     getFacilities();
@@ -77,11 +85,12 @@ const HomePage = () => {
       <div className="query bottom my-4">
         <button onClick={getQ4Queries}>Execute Q4 Query</button>
         <button onClick={getQ5Queries}>Execute Q5 Query</button>
-        <button>Execute Q6 Query</button>
+        <button onClick={getQ6Queries}>Execute Q6 Query</button>
       </div>
 
       {Q4Queries && <Q4Table data={Q4Queries} />}
       {Q5Queries && <Q5Table data={Q5Queries} />}
+      {Q6Queries && <Q6Table data={Q6Queries} />}
     </Wrapper>
   );
 };
