@@ -8,7 +8,8 @@ const router = Router();
 // get all shift
 router.get("/", async (_, res) => {
   try {
-    const shifts = await AppDataSource.query(`SELECT * FROM question_one_shifts
+    const shifts =
+      await AppDataSource.query(`SELECT *, (shift_date+start_time)::TIMESTAMP as start_date_time, (shift_date+end_time)::TIMESTAMP as end_date_time FROM question_one_shifts
 JOIN facilities on facilities.facility_id = question_one_shifts.facility_id;
 `);
     res.send(shifts);
