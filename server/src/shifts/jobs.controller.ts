@@ -52,7 +52,8 @@ router.get("/q6", async (req, res) => {
   if (!nurse_id) return res.status(503).send("Please add a valid nurse_id");
   try {
     const nurses = await AppDataSource.query(
-      `SELECT DISTINCT nurses.nurse_name FROM nurses
+      `
+  SELECT DISTINCT nurses.nurse_name FROM nurses
 JOIN nurse_hired_jobs AS hr2 ON hr2.nurse_id = nurses.nurse_id
 JOIN jobs ON jobs.job_id = hr2.job_id
 WHERE jobs.facility_id IN (
@@ -62,7 +63,9 @@ WHERE j1.job_id IN (
 	SELECT job_id FROM nurse_hired_jobs
   WHERE nurse_hired_jobs.nurse_id=$1
 )
-);`,
+)
+AND nurses.nurse_id !=$1
+`,
       [+nurse_id]
     );
     res.send(nurses);
