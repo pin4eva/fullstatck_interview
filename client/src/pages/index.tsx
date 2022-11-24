@@ -36,7 +36,13 @@ const HomePage = () => {
           <ul>
             <li>
               Overlap Minutes:{" "}
-              <span className="fw-bold ms-2">
+              <span
+                className={`fw-bold ms-2 ${
+                  overlapResult && overlapResult?.overlapMinutes < 0
+                    ? "text-danger"
+                    : ""
+                }`}
+              >
                 {overlapResult?.overlapMinutes}
               </span>{" "}
             </li>

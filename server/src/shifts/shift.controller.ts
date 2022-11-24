@@ -52,20 +52,15 @@ WHERE shift_id = $1;`,
       "m",
       true
     );
-    let exceedsOverlapThreshold = false;
 
     if (shift1.facility_id === shift2.facility_id) {
       maximumOverlapThreshold = 30;
     }
 
-    if (overlapMinutes > maximumOverlapThreshold) {
-      exceedsOverlapThreshold = true;
-    }
-    // res.send([shift1, shift2]);
     res.send({
       maximumOverlapThreshold,
       overlapMinutes,
-      exceedsOverlapThreshold,
+      exceedsOverlapThreshold: overlapMinutes > maximumOverlapThreshold,
     });
   } catch (error) {
     res.status(500).json(error);
